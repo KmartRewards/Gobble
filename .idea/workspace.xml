@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="02ebc9f2-1abc-4c59-8578-782fbc300a4b" name="Changes" comment="">
+    <list default="true" id="02ebc9f2-1abc-4c59-8578-782fbc300a4b" name="Changes" comment="buton">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Goggle/Data" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Goggle/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Goggle/Main.java" afterDir="false" />
     </list>
     <list id="08503d1a-22d9-47d2-9fb1-bfdd196080fe" name="Changes by michaeljernstrom" comment="">
@@ -29,10 +27,8 @@
   <component name="LineStatusTrackerManager">
     <file path="$PROJECT_DIR$/src/Goggle/Main.java">
       <ranges>
-        <range start1="0" end1="0" start2="0" end2="4" changelist="02ebc9f2-1abc-4c59-8578-782fbc300a4b" />
-        <range start1="1" end1="1" start2="5" end2="6" changelist="02ebc9f2-1abc-4c59-8578-782fbc300a4b" />
-        <range start1="2" end1="3" start2="7" end2="10" changelist="02ebc9f2-1abc-4c59-8578-782fbc300a4b" />
-        <range start1="4" end1="4" start2="11" end2="29" changelist="08503d1a-22d9-47d2-9fb1-bfdd196080fe" />
+        <range start1="2" end1="2" start2="2" end2="4" changelist="02ebc9f2-1abc-4c59-8578-782fbc300a4b" />
+        <range start1="11" end1="11" start2="13" end2="38" changelist="08503d1a-22d9-47d2-9fb1-bfdd196080fe" />
       </ranges>
     </file>
   </component>
@@ -92,6 +88,14 @@
       <option name="presentableId" value="Default" />
       <updated>1666636784439</updated>
     </task>
+    <task id="LOCAL-00001" summary="buton">
+      <created>1666723106480</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1666723106481</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -110,5 +114,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="buton" />
+    <option name="LAST_COMMIT_MESSAGE" value="buton" />
   </component>
 </project>
