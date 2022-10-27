@@ -1,7 +1,10 @@
 package Goggle;
 import com.mongodb.ConnectionString;
-import  com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.ServerApi;
+import com.mongodb.ServerApiVersion;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -100,9 +103,23 @@ public class Main {
 
 
 
-        ConnectionString connectionString = new ConnectionString("mongodb://GobbleAdmin:<password>@ac-jy57ork-shard-00-00.vogil9m.mongodb.net:27017,ac-jy57ork-shard-00-01.vogil9m.mongodb.net:27017,ac-jy57ork-shard-00-02.vogil9m.mongodb.net:27017/?ssl=true&replicaSet=atlas-1318b5-shard-0&authSource=admin&retryWrites=true&w=majority");
-        MongoClient mongoClient = new MongoClients.create(connectionString);
-        MongoDatabase database = mongoClient.getDatabase("test");
+
+        ConnectionString connectionString = new ConnectionString("mongodb+srv://GobbleAdmin:g0bbleg0bble@cluster0.vogil9m.mongodb.net/?retryWrites=true&w=majority");
+        MongoClientSettings settings = MongoClientSettings.builder()
+                .applyConnectionString(connectionString)
+                .serverApi(ServerApi.builder()
+                        .version(ServerApiVersion.V1)
+                        .build())
+                .build();
+        MongoClient mongoClient = MongoClients.create(settings);
+        MongoDatabase database = mongoClient.getDatabase("Stuffing");
+        MongoCollection<Document> collection = database.getCollection("bread");
+
+        System.out.println(collection.countDocuments());
+        Document myDoc = collection.find().first();
+        System.out.println(myDoc.toJson());
+
+
 
 
     }
