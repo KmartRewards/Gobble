@@ -3,10 +3,7 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerApi;
 import com.mongodb.ServerApiVersion;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import org.bson.Document;
 
 import javax.imageio.ImageIO;
@@ -115,9 +112,15 @@ public class Main {
         MongoDatabase database = mongoClient.getDatabase("Stuffing");
         MongoCollection<Document> collection = database.getCollection("bread");
 
-        System.out.println(collection.countDocuments());
-        Document myDoc = collection.find().first();
-        System.out.println(myDoc.toJson());
+
+        MongoCursor<Document> cursor = collection.find().iterator();
+        try {
+            while (cursor.hasNext()) {
+                System.out.println(cursor.next().toJson());
+            }
+        } finally {
+            cursor.close();
+        }
 
 
 
