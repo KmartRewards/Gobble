@@ -1,4 +1,6 @@
 package Goggle;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerApi;
@@ -19,6 +21,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import static com.mongodb.client.model.Filters.eq;
+
 public class Main {
     private JButton exit;
     private Border searchBord;
@@ -49,9 +54,14 @@ public class Main {
         exit.setBorder(exitBord);
         exit.setFocusable(false);
         Font font = new Font("Comic Sans MS", Font.BOLD, 14);
+        frame.setLayout(new BorderLayout());
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.add(exit);
+        buttonPanel.setBackground(new Color(84, 59, 45));
+        contentPane.add(buttonPanel,BorderLayout.SOUTH);
         exit.setFont(font);
         exit.setBounds(1830, 1170, 90, 30);
-        contentPane.add(exit);
         exit.setVisible(true);
         exit.setBackground(new Color(237, 115, 46));
         exit.addActionListener(e -> {
@@ -77,25 +87,6 @@ public class Main {
 //        lbl.setIcon(logo);
 //        lbl.setVisible(true);
 //        contentPane.add(lbl);
-//        MongoClientURI connectionString = new MongoClientURI("mongodb://GobbleAdmin:g0bbleg0bble@cluster0.vogil9m.mongodb.net/?retryWrites=true&w=majority");
-//        MongoClient mongoClient = new MongoClient(connectionString);
-//        MongoDatabase database = mongoClient.getDatabase("Stuffing");
-//        MongoCollection<Document> collection = database.getCollection("bread");
-//        Document doc = new Document("name", "MongoDB")
-//                .append("type", "database")
-//                .append("count", 1)
-//                .append("versions", Arrays.asList("v3.2", "v3.0", "v2.6"))
-//                .append("info", new Document("x", 203).append("y", 102));
-//        collection.insertOne(doc);
-//
-//
-//
-//        ConnectionString connectionString = new ConnectionString("mongodb://GobbleAdmin:<password>@ac-jy57ork-shard-00-00.vogil9m.mongodb.net:27017,ac-jy57ork-shard-00-01.vogil9m.mongodb.net:27017,ac-jy57ork-shard-00-02.vogil9m.mongodb.net:27017/?ssl=true&replicaSet=atlas-1318b5-shard-0&authSource=admin&retryWrites=true&w=majority");
-//        MongoClientSettings settings = MongoClientSettings.builder()
-//                .applyConnectionString(connectionString)
-//                .build();
-//        MongoClient mongoClient = MongoClients.create(settings);
-//        MongoDatabase database = mongoClient.getDatabase("test");
 
 
 
@@ -113,16 +104,12 @@ public class Main {
         MongoCollection<Document> collection = database.getCollection("bread");
 
 
-        MongoCursor<Document> cursor = collection.find().iterator();
-        try {
-            while (cursor.hasNext()) {
-                System.out.println(cursor.next().toJson());
-            }
-        } finally {
-            cursor.close();
-        }
-
-
+        Document myDoc = collection.find().first();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(myDoc);
+        System.out.println(json);
+        myDoc = collection.find(eq("name", "Gobble")).first();
+        System.out.println(myDoc.toJson());
 
 
     }
