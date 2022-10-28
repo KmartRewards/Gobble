@@ -77,10 +77,6 @@ public class Main {
         search.setVisible(true);
         Border searchBord = BorderFactory.createLineBorder(new Color(56, 38, 21), 1);
         search.setBorder(searchBord);
-        search.addActionListener(e->{
-            searchGUI(search.getText());
-            frame.dispose();
-        });
         //logo
 //        JPanel p = new JPanel();
 //        contentPane.setBounds((frame.getToolkit().getScreenSize().width / 2) - 370, (frame.getToolkit().getScreenSize().height / 4), 800, 50);
@@ -108,23 +104,24 @@ public class Main {
         MongoDatabase database = mongoClient.getDatabase("Stuffing");
         MongoCollection<Document> collection = database.getCollection("bread");
 
-        Scanner s = new Scanner(System.in);
-        String n = s.nextLine();
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Document myDoc = collection.find(eq("name", n.substring(0, 1).toUpperCase() + n.substring(1))).first();
-        if(myDoc != null) {
-            String json = gson.toJson(myDoc);
-            System.out.println(json);
-        }else{
-            MongoCursor<Document> cursor = collection.find().iterator();
-            try {
-                while (cursor.hasNext()) {
-                    System.out.println(gson.toJson(cursor.next()));
+        search.addActionListener(e-> {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Document myDoc = collection.find(eq("name", search.getText().substring(0, 1).toUpperCase() + search.getText().substring(1))).first();
+            if (myDoc != null) {
+                String json = gson.toJson(myDoc);
+                System.out.println(json);
+            } else {
+                MongoCursor<Document> cursor = collection.find().iterator();
+                try {
+                    while (cursor.hasNext()) {
+                        System.out.println(gson.toJson(cursor.next()));
+                    }
+                } finally {
+                    cursor.close();
                 }
-            } finally {
-                cursor.close();
             }
-        }
+            frame.dispose();
+        });
 
     }
 
