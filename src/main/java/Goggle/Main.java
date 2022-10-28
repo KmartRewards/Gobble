@@ -112,8 +112,7 @@ public class Main {
             if (myDoc != null) {
                 String fileDataJsonObject = myDoc.toJson();
                 JSONObject obj = new JSONObject(fileDataJsonObject);
-                String name = (String) obj.get("name");
-                System.out.println(name);
+                searchGUI(obj);
             } else {
                 MongoCursor<Document> cursor = collection.find().iterator();
                 try {
@@ -124,12 +123,11 @@ public class Main {
                 }
             }
             frame.dispose();
-            searchGUI(search.getText());
         });
 
     }
 
-    public static void searchGUI(String search) {
+    public static void searchGUI(JSONObject search) {
         JPanel contentPane = new JPanel();
         JFrame newFrame = new JFrame();
         contentPane.setLayout(null);
