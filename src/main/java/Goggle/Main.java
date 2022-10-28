@@ -125,8 +125,34 @@ public class Main {
 
     }
 
-    public static void searchGUI(String search){
-
+    public static void searchGUI(String search) {
+        JFrame frame = new JFrame();
+        contentPane.setLayout(null);
+        frame.setContentPane(contentPane);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setBackground(new Color(84, 59, 45));
+        frame.setUndecorated(true);
+        frame.setBounds(0, 0, frame.getToolkit().getScreenSize().width, frame.getToolkit()
+                .getScreenSize().height);
+        frame.setVisible(true);
+        //exit button
+        JButton exit = new JButton("Quit");
+        Border exitBord = BorderFactory.createLineBorder(new Color(56, 38, 21), 1);
+        exit.setBorder(exitBord);
+        exit.setFocusable(false);
+        Font font = new Font("Comic Sans MS", Font.BOLD, 14);
+        frame.setLayout(new BorderLayout());
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.add(exit);
+        buttonPanel.setBackground(new Color(84, 59, 45));
+        contentPane.add(buttonPanel,BorderLayout.SOUTH);
+        exit.setFont(font);
+        exit.setBounds(1830, 1170, 90, 30);
+        exit.setVisible(true);
+        exit.setBackground(new Color(237, 115, 46));
+        exit.addActionListener(e -> {
+            frame.dispose();
+        });
     }
-
 }
