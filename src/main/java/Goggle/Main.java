@@ -8,6 +8,7 @@ import com.mongodb.ServerApiVersion;
 import com.mongodb.client.*;
 import javafx.scene.input.KeyCode;
 import org.bson.Document;
+import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -35,11 +36,11 @@ public class Main {
         Scanner s = new Scanner(System.in);
         openGUI();
     }
-    public static JPanel contentPane = new JPanel();
 
     public static int PrevX, PrevY, PrevWidth, PrevHeight;
     public static void openGUI() throws IOException {
         //frame
+        JPanel contentPane = new JPanel();
         JFrame frame = new JFrame();
         contentPane.setLayout(null);
         frame.setContentPane(contentPane);
@@ -107,41 +108,45 @@ public class Main {
         search.addActionListener(e-> {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             Document myDoc = collection.find(eq("name", search.getText().substring(0, 1).toUpperCase() + search.getText().substring(1))).first();
+//            String place = myDoc.get("name").getAsString();
             if (myDoc != null) {
-                String json = gson.toJson(myDoc);
-                System.out.println(json);
+                String fileDataJsonObject = myDoc.toJson();
+                JSONObject obj = new JSONObject(fileDataJsonObject);
+                String name = (String) obj.get("name");
+                System.out.println(name);
             } else {
                 MongoCursor<Document> cursor = collection.find().iterator();
                 try {
                     while (cursor.hasNext()) {
-                        System.out.println(gson.toJson(cursor.next()));
                     }
                 } finally {
                     cursor.close();
                 }
             }
             frame.dispose();
+            searchGUI(search.getText());
         });
 
     }
 
     public static void searchGUI(String search) {
-        JFrame frame = new JFrame();
+        JPanel contentPane = new JPanel();
+        JFrame newFrame = new JFrame();
         contentPane.setLayout(null);
-        frame.setContentPane(contentPane);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setBackground(new Color(84, 59, 45));
-        frame.setUndecorated(true);
-        frame.setBounds(0, 0, frame.getToolkit().getScreenSize().width, frame.getToolkit()
+        newFrame.setContentPane(contentPane);
+        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        newFrame.getContentPane().setBackground(new Color(84, 59, 45));
+        newFrame.setUndecorated(true);
+        newFrame.setBounds(0, 0, newFrame.getToolkit().getScreenSize().width, newFrame.getToolkit()
                 .getScreenSize().height);
-        frame.setVisible(true);
+        newFrame.setVisible(true);
         //exit button
         JButton exit = new JButton("Quit");
         Border exitBord = BorderFactory.createLineBorder(new Color(56, 38, 21), 1);
         exit.setBorder(exitBord);
         exit.setFocusable(false);
         Font font = new Font("Comic Sans MS", Font.BOLD, 14);
-        frame.setLayout(new BorderLayout());
+        newFrame.setLayout(new BorderLayout());
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.add(exit);
@@ -152,7 +157,7 @@ public class Main {
         exit.setVisible(true);
         exit.setBackground(new Color(237, 115, 46));
         exit.addActionListener(e -> {
-            frame.dispose();
+            newFrame.dispose();
         });
     }
 }
