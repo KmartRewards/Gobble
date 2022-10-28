@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02ebc9f2-1abc-4c59-8578-782fbc300a4b" name="Changes" comment="buton">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20190722.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_2_0_3.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Goggle/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Goggle/Main.java" afterDir="false" />
     </list>
@@ -111,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666968808836</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="buton">
+      <created>1666980787441</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666980787441</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -132,9 +136,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="buton" />
     <MESSAGE value="Database works now!" />
     <MESSAGE value="Added start of working search bar (no button yet). Will close the current gui and open a new one showing all search results." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added start of working search bar (no button yet). Will close the current gui and open a new one showing all search results." />
+    <MESSAGE value="buton" />
+    <option name="LAST_COMMIT_MESSAGE" value="buton" />
   </component>
 </project>
