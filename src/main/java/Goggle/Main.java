@@ -6,6 +6,7 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerApi;
 import com.mongodb.ServerApiVersion;
 import com.mongodb.client.*;
+import javafx.scene.input.KeyCode;
 import org.bson.Document;
 
 import javax.imageio.ImageIO;
@@ -76,6 +77,10 @@ public class Main {
         search.setVisible(true);
         Border searchBord = BorderFactory.createLineBorder(new Color(56, 38, 21), 1);
         search.setBorder(searchBord);
+        search.addActionListener(e->{
+            searchGUI(search.getText());
+            frame.dispose();
+        });
         //logo
 //        JPanel p = new JPanel();
 //        contentPane.setBounds((frame.getToolkit().getScreenSize().width / 2) - 370, (frame.getToolkit().getScreenSize().height / 4), 800, 50);
@@ -103,14 +108,28 @@ public class Main {
         MongoDatabase database = mongoClient.getDatabase("Stuffing");
         MongoCollection<Document> collection = database.getCollection("bread");
 
-
-        Document myDoc = collection.find().first();
+        Scanner s = new Scanner(System.in);
+        String n = s.nextLine();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(myDoc);
-        System.out.println(json);
-        myDoc = collection.find(eq("name", "Gobble")).first();
-        System.out.println(myDoc.toJson());
-
+        Document myDoc = collection.find(eq("name", n.substring(0, 1).toUpperCase() + n.substring(1))).first();
+        if(myDoc != null) {
+            String json = gson.toJson(myDoc);
+            System.out.println(json);
+        }else{
+            MongoCursor<Document> cursor = collection.find().iterator();
+            try {
+                while (cursor.hasNext()) {
+                    System.out.println(gson.toJson(cursor.next()));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
 
     }
+
+    public static void searchGUI(String search){
+
+    }
+
 }
