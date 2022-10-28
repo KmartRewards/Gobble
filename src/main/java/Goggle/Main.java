@@ -45,7 +45,7 @@ public class Main {
         contentPane.setLayout(null);
         frame.setContentPane(contentPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setBackground(new Color(84, 59, 45));
+        frame.getContentPane().setBackground(new Color(248, 240, 227));
         frame.setUndecorated(true);
         frame.setBounds(0, 0, frame.getToolkit().getScreenSize().width, frame.getToolkit()
                 .getScreenSize().height);
@@ -103,6 +103,7 @@ public class Main {
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase database = mongoClient.getDatabase("Stuffing");
+
         MongoCollection<Document> collection = database.getCollection("bread");
 
         search.addActionListener(e-> {
@@ -133,7 +134,7 @@ public class Main {
         contentPane.setLayout(null);
         newFrame.setContentPane(contentPane);
         newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        newFrame.getContentPane().setBackground(new Color(84, 59, 45));
+        newFrame.getContentPane().setBackground(new Color(248, 240, 227));
         newFrame.setUndecorated(true);
         newFrame.setBounds(0, 0, newFrame.getToolkit().getScreenSize().width, newFrame.getToolkit()
                 .getScreenSize().height);
@@ -157,5 +158,12 @@ public class Main {
         exit.addActionListener(e -> {
             newFrame.dispose();
         });
+        JTextArea result = new JTextArea();
+        result.setFocusable(false);
+        result.setBounds((newFrame.getToolkit().getScreenSize().width / 2) - 370, (newFrame.getToolkit().getScreenSize().height / 2), 800, 50);
+        contentPane.add(result);
+        result.setVisible(true);
+        Border searchBord = BorderFactory.createLineBorder(new Color(56, 38, 21), 1);
+        result.setBorder(searchBord);
     }
 }
